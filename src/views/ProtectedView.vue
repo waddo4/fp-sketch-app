@@ -1,18 +1,21 @@
 <template>
     <div>
-        {{ userSession.session }}
+        <p>Hello from protected</p>
     </div>
-    <button className="p-4 bg-blue-400 text-white rounded-xl hover:bg-blue-500" @click="logOut">
-        Sign Out
-    </button>
 </template>
 
 <script setup>
 import { supabase } from '../supabase/supabase';
-import { userSessionStore } from '../stores/userSession';
+import { onMounted, ref, toRefs } from 'vue'
 import router from '../router/index';
 // initialize userSession store
-const userSession = userSessionStore()
+// const props = defineProps(['session']);
+// const { session } = toRefs(props)
+
+// onMounted(() => {
+//     getProfile()
+// });
+
 // logout function
 const logOut = async () => {
     try {

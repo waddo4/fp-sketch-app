@@ -1,24 +1,26 @@
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div>
+    <Navigation/>
+    <router-view />
+  </div>
 </template>
 
 <script>
-
+import Navigation from './components/Navigation.vue'
+export default {
+  components: {
+    Navigation,
+  },  
+  setup() {
+    // Create data / vars
+    // Check to see if user is already logged in
+    // If user does not exist, need to make app ready
+    // Runs when there is a auth state change
+    // if user is logged in, this will fire
+    return {};
+  },
+};
 </script>
-
 
 <style scoped>
 </style>

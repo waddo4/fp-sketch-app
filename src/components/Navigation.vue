@@ -1,13 +1,14 @@
 <template>
-    <header>
-        <nav>
-            <div>
-                <h1>Sketch app</h1>
+    <header class="text-indigo-600">
+        <nav class="container py-5 px-4 flex flex-col gap-4 items-center sm:flex-row">
+            <div class="flex items-center gap-x-4">
+                <h1 class="text-lg">Sketch app</h1>
             </div>
-            <ul>
-                <router-link :to="{ name: 'Home'}">Home</router-link> 
-                <router-link :to="{ name: 'Login' }">Login</router-link>
-                <router-link :to="{ name: 'Register' }">Register</router-link>
+            <ul class="flex flex-1 justify-end gap-x-10">
+                <router-link class="cursor-pointer" :to="{ name: 'Home'}">Home</router-link> 
+                <router-link class="cursor-pointer" :to="{ name: 'Login' }">Login</router-link>
+                <router-link class="cursor-pointer" :to="{ name: 'Register' }">Register</router-link>
+                <router-link class="cursor-pointer" :to="{ name: 'Draw' }">Draw</router-link>
                 <router-link to="/protected">Protected</router-link>
             </ul>
         </nav>

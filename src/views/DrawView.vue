@@ -20,7 +20,7 @@ import $ from "jquery";
 //     const { pageX:x, pageY:y } = e; // Destructuring with renaming
 //     console.log(`X: ${ x }, Y: ${ y }`)
 // });
-var xStart,
+let xStart,
     xEnd,
     yStart,
     yEnd,
@@ -42,7 +42,7 @@ $(document).ready(function (){
     
     
 $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove touchend', function(e){
-            var orig = e.originalEvent;
+            let orig = e.originalEvent;
             
             if(e.type == 'mousedown'){
                 e.preventDefault(); e.stopPropagation();
@@ -58,9 +58,10 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
             }else if(e.type == 'mousemove'){
                 if(paint==true){
                     xEnd = e.clientX - $(this).offset().left;
-                      yEnd = e.clientY - $(this).offset().top;
+                    // xEnd1 = (e.clientX + 50) - $(this).offset().left;
+                    yEnd = e.clientY - $(this).offset().top;
                     
-                   var lineThickness = 1 + Math.sqrt((xStart - xEnd) *(xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/5;
+                   let lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/5;
                    
                    if(lineThickness > 10){
                         lineThickness = 10;   
@@ -90,24 +91,14 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                     if(paint==true){
                         xEnd = orig.changedTouches[0].pageX - $(this).offset().left;
                           yEnd = orig.changedTouches[0].pageY - $(this).offset().top;
-                        
-                        
-                        
-                        var x1 = xEnd,
-            x2 = xStart,
-            y1 = yEnd,
-            y2 = yStart;
-
-       
-        lineThickness = 1 + Math.sqrt((xStart - xEnd) *(xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/6;
+                         
+        lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/6;
                    if(lineThickness > 10){
                         lineThickness = 10;   
                     }
                     
-                    
         ctx.lineWidth = lineThickness;
-                        
-                        
+                                
                         draw(e.type);
                     }
                 }

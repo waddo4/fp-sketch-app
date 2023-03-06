@@ -11,12 +11,12 @@
              <h1 class="text-3xl text-slate-700 mb-4">Login</h1>
              <div class="flex flex-col mb-2">
                  <label for="email" class="mb-1 text-sm text-slate-700">Email</label>
-                 <input type="text" required class="p-2 text-gray-500 focus:outline-none" id="email" v-model="email">
+                 <input type="text" required class="p-2 text-gray-500 focus:outline-none bg-white" id="email" v-model="email">
              </div>
  
              <div class="flex flex-col mb-2">
                  <label for="password" class="mb-1 text-sm text-slate-700">Password</label>
-                 <input type="password" required class="p-2 text-gray-500 focus:outline-none" id="password" v-model="password">
+                 <input type="password" required class="p-2 text-gray-500 focus:outline-none bg-white" id="password" v-model="password">
              </div>
  
              <button type="submit"
@@ -49,7 +49,9 @@
                  password: password.value,
              });
              if (error) throw error;
-             router.push({ name: "Home" });
+             const user = await getUser();
+            //  console.log(user)
+             router.push({ name: "Home", params: { user } });
              } catch (error) {
                  errorMsg.value = `Error: ${error.message}`;
                  console.log(error.message)
@@ -58,6 +60,13 @@
                  }, 5000);
          }
        }  
+
+       // getUser function
+       const getUser = async () => {
+         const { data: { user } } = await supabase.auth.getUser();
+         return user;
+       }
+
        return {email, password, errorMsg, signInWithEmail};
      },
    };

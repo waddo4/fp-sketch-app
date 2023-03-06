@@ -2,9 +2,7 @@
     <div class="max-w-screen-xl mx-auto px-4 py-10">
         <div id="app" class="p-8 flex flex-col items-center bg-green-300 rounded-md shadow-lg ">
             <h1 class="flex text-3xl text-slate-700 mb-4">Sketch</h1>
-
-            <!-- <vue-drawing-canvas ref="VueCanvasDrawing" class="rounded-md border-4 border-rose-500 bg-white"/> -->
-            <canvas id="counter" width="1060" height="460" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
+            <canvas id="canvas" width="1060" height="460" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
             <p>
                 x-axis: <strong>{{ x }}</strong>, 
                 y-axis: <strong>{{ y }}</strong>
@@ -30,21 +28,20 @@ let xStart,
     yEnd1,
     paint,
     ctx;
-
     const diff = 50;
-$(document).ready(function (){
 
-    if (typeof FlashCanvas != "undefined") {
-        FlashCanvas.initElement($('canvas')[0]);
-    }
-    ctx = $('canvas')[0].getContext("2d");
-    ctx.strokeStyle = 'blue';
-    ctx.font = '40pt Calibri';
-    ctx.fillStyle = 'blue';
-    ctx.fillText('Hello World', 150, 100);
-    ctx.lineJoin="round";
-    ctx.lineCap="round";
-    ctx.lineWidth = 1;
+export default {
+    mounted() {
+        const canvas = $('#canvas')[0];
+        if (canvas) {
+        ctx = canvas.getContext("2d");
+        ctx.strokeStyle = 'blue';
+        ctx.font = '40pt Calibri';
+        ctx.fillStyle = 'blue';
+        ctx.fillText('Hello World', 150, 100);
+        ctx.lineJoin="round";
+        ctx.lineCap="round";
+        ctx.lineWidth = 1;
     
     
 $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove touchend', function(e){
@@ -119,7 +116,7 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
             }
             
         });
-});
+}}};
 
 
 function draw(event){
@@ -129,14 +126,14 @@ function draw(event){
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);
             ctx.moveTo(xStart1, yStart);
-            ctx.lineTo(xEnd1, yEnd1);
+            ctx.lineTo(xEnd1, yEnd);
             ctx.stroke();
         }else if(event == 'mousemove'){
             ctx.beginPath();
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);
             ctx.moveTo(xStart1, yStart);
-            ctx.lineTo(xEnd1, yEnd1);
+            ctx.lineTo(xEnd1, yEnd);
             ctx.stroke();
         }else if(event == 'touchstart'){
             ctx.beginPath();

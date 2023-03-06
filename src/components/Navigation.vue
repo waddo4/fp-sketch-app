@@ -9,7 +9,6 @@
                 <router-link class="cursor-pointer" :to="{ name: 'Login' }">Login</router-link>
                 <router-link class="cursor-pointer" :to="{ name: 'Register' }">Register</router-link>
                 <router-link class="cursor-pointer" :to="{ name: 'Draw' }">Draw</router-link>
-                <router-link to="/protected">Protected</router-link>
             </ul>
         </nav>
     </header>

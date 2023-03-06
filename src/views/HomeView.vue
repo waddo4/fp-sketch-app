@@ -2,6 +2,7 @@
     <div class="max-w-screen-sm mx-auto px-4 py-10">
       <div class="p-8 flex flex-col items-center bg-green-300 rounded-md shadow-lg ">
              <h1 class="flex text-3xl text-slate-700 mb-4">Sketch app</h1>
+             <!-- <h1>Welcome {{ user.email }}</h1> -->
 
              <router-link :to="{name: 'Login'}" custom v-slot="{ navigate }">
               <button @click="navigate"
@@ -23,15 +24,21 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+import { supabase } from '../supabase/supabase'
 
 export default {
   name: "Home",
-  components: {},
   setup() {
-    // Create data / vars
-    // Get data
-    // Run data function
-    return {};
+    const router = useRouter();
+    const user = router.currentRoute.value.params.user;
+    return { user };
   },
 };
+const getUser = async () => {
+         const { data: { user } } = await supabase.auth.getUser();
+         return user;
+       }
+       const user = await getUser();
+       console.log(user.email)
 </script>

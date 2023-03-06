@@ -10,17 +10,17 @@
             <h1 class="text-3xl text-slate-700 mb-4">Register</h1>
             <div class="flex flex-col mb-2">
                 <label for="email" class="mb-1 text-sm text-slate-700">Email</label>
-                <input type="text" required class="p-2 text-gray-500 focus:outline-none" id="email" v-model="email">
+                <input type="text" required class="p-2 text-gray-500 focus:outline-none bg-white" id="email" v-model="email">
             </div>
 
             <div class="flex flex-col mb-2">
                 <label for="password" class="mb-1 text-sm text-slate-700">Password</label>
-                <input type="password" required class="p-2 text-gray-500 focus:outline-none" id="password" v-model="password">
+                <input type="password" required class="p-2 text-gray-500 focus:outline-none bg-white" id="password" v-model="password">
             </div>
 
             <div class="flex flex-col mb-2">
                 <label for="confirmPassword" class="mb-1 text-sm text-slate-700">Confirm Password</label>
-                <input type="password" required class="p-2 text-gray-500 focus:outline-none" id="confirmPassword" v-model="confirmPassword">
+                <input type="password" required class="p-2 text-gray-500 focus:outline-none bg-white" id="confirmPassword" v-model="confirmPassword">
             </div>
 
             <button type="submit" class="mt-6 py-2 px-6 rounded-sm self-start text-sm text-blue-500 bg-slate-300 duration-200 border-solid border-purple-400 border-2 border-transparent hover:border-green-500 hover:bg-purple-400 hover:text-white">Register</button>

@@ -1,10 +1,10 @@
 <template>
     <div class="max-w-screen-xl mx-auto px-4 py-10">
         <div id="app" class="p-8 flex flex-col items-center bg-green-300 rounded-md shadow-lg ">
-            <h1 class="flex text-3xl text-slate-700 mb-4">Drawing with mousemove event</h1>
+            <h1 class="flex text-3xl text-slate-700 mb-4">Sketch</h1>
 
             <!-- <vue-drawing-canvas ref="VueCanvasDrawing" class="rounded-md border-4 border-rose-500 bg-white"/> -->
-            <canvas id="counter" width="560" height="360" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
+            <canvas id="counter" width="1060" height="460" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
             <p>
                 x-axis: <strong>{{ x }}</strong>, 
                 y-axis: <strong>{{ y }}</strong>
@@ -21,13 +21,19 @@ import $ from "jquery";
 //     console.log(`X: ${ x }, Y: ${ y }`)
 // });
 let xStart,
+    xStart1,
     xEnd,
+    xEnd1,
     yStart,
+    yStart1,
     yEnd,
+    yEnd1,
     paint,
     ctx;
+
+    const diff = 50;
 $(document).ready(function (){
-    
+
     if (typeof FlashCanvas != "undefined") {
         FlashCanvas.initElement($('canvas')[0]);
     }
@@ -48,9 +54,14 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                 e.preventDefault(); e.stopPropagation();
     
                  xStart = e.clientX - $(this).offset().left;
+                 xStart1 = (e.clientX + diff) - $(this).offset().left;
                   yStart = e.clientY - $(this).offset().top;
+                  yStart1 = (e.clientY + diff) - $(this).offset().top;
+
                   xEnd = xStart;
+                  xEnd1 = xStart1;
                   yEnd = yStart;
+                  yEnd1 = xStart1;
                 
                 paint = true;
                 draw(e.type);
@@ -58,8 +69,9 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
             }else if(e.type == 'mousemove'){
                 if(paint==true){
                     xEnd = e.clientX - $(this).offset().left;
-                    // xEnd1 = (e.clientX + 50) - $(this).offset().left;
+                    xEnd1 = (e.clientX + diff) - $(this).offset().left;
                     yEnd = e.clientY - $(this).offset().top;
+                    yEnd1 = (e.clientY + diff) - $(this).offset().top;
                     
                    let lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/5;
                    
@@ -116,11 +128,15 @@ function draw(event){
             ctx.beginPath();
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);
+            ctx.moveTo(xStart1, yStart);
+            ctx.lineTo(xEnd1, yEnd1);
             ctx.stroke();
         }else if(event == 'mousemove'){
             ctx.beginPath();
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);
+            ctx.moveTo(xStart1, yStart);
+            ctx.lineTo(xEnd1, yEnd1);
             ctx.stroke();
         }else if(event == 'touchstart'){
             ctx.beginPath();

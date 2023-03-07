@@ -14,25 +14,40 @@
 <script>
 import $ from "jquery";
 
-$("#canvas").on('mousemove', (e) => {
-    const { pageX:x, pageY:y } = e; // Destructuring with renaming
-    console.log(`X: ${ x }, Y: ${ y }`)
-});
+// let windowHalfway = window.innerWidth / 2
+// console.log(windowHalfway)
+// let difference,
+//     xstartMirror
+//  if (pageX < windowHalfway) {
+//     difference = windowHalfway - pageX
+//     xstartMirror = windowHalfway + difference
+//     xEndMirror = xStartMirror
+// }
+//  if (pageX > windowHalfway) {
+//     difference = pageX - windowHalfway
+//     xStartMirror = windowHalfway - difference
+//     xEndMirror = xStartMirror
+//  }
 
 let xStart,
-    xStart1,
     xEnd,
-    xEnd1,
     yStart,
-    yStart1,
     yEnd,
-    yEnd1,
+    windowMidLine,
+    xStartMirror,
+    xEndMirror,
+    yStartMirror,
+    yEndMirror,
     paint,
     ctx;
-    const diff = 50;
-
+    
+// $("#canvas").on('mousemove', (e) => {
+//     const { pageX:x, pageY:y } = e; // Destructuring with renaming
+//     console.log(`X: ${ x }, Y: ${ y }`)
+// });
 export default {
     mounted() {
+
         const canvas = $('#canvas')[0];
         if (canvas) {
         ctx = canvas.getContext("2d");
@@ -48,28 +63,22 @@ export default {
 $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove touchend', function(e){
             let orig = e.originalEvent;
             
-            if(e.type == 'mousedown'){
+            if(e.type === 'mousedown'){
                 e.preventDefault(); e.stopPropagation();
     
-                 xStart = e.clientX - $(this).offset().left;
-                 xStart1 = (e.clientX + diff) - $(this).offset().left;
+                  xStart = e.clientX - $(this).offset().left;
                   yStart = e.clientY - $(this).offset().top;
-                  yStart1 = (e.clientY + diff) - $(this).offset().top;
 
                   xEnd = xStart;
-                  xEnd1 = xStart1;
                   yEnd = yStart;
-                  yEnd1 = xStart1;
                 
                 paint = true;
                 draw(e.type);
             
-            }else if(e.type == 'mousemove'){
-                if(paint==true){
+            }else if(e.type === 'mousemove'){
+                if(paint === true){
                     xEnd = e.clientX - $(this).offset().left;
-                    xEnd1 = (e.clientX + diff) - $(this).offset().left;
                     yEnd = e.clientY - $(this).offset().top;
-                    yEnd1 = (e.clientY + diff) - $(this).offset().top;
                     
                    let lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart - xEnd) + (yStart - yEnd) * (yStart - yEnd))/5;
                    
@@ -80,12 +89,12 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                     ctx.lineWidth = lineThickness;
                     draw(e.type);
                 }
-            }else if(e.type == 'mouseup'){
+            }else if(e.type === 'mouseup'){
                 paint = false;
-            }else if(e.type == 'mouseleave'){
+            }else if(e.type === 'mouseleave'){
                 paint = false;
-            }else if(e.type == 'touchstart'){
-                if(orig.touches.length == 1){
+            }else if(e.type === 'touchstart'){
+                if(orig.touches.length === 1){
                     e.preventDefault(); e.stopPropagation();
 
                        xStart = orig.changedTouches[0].pageX - $(this).offset().left;
@@ -96,9 +105,9 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                     paint = true;
                     draw(e.type);
                 }
-            }else if(e.type == 'touchmove'){
-                if(orig.touches.length == 1){
-                    if(paint==true){
+            }else if(e.type === 'touchmove'){
+                if(orig.touches.length === 1){
+                    if(paint === true){
                         xEnd = orig.changedTouches[0].pageX - $(this).offset().left;
                           yEnd = orig.changedTouches[0].pageY - $(this).offset().top;
                          
@@ -112,7 +121,7 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                         draw(e.type);
                     }
                 }
-            }else if(e.type == 'touchend'){
+            }else if(e.type === 'touchend'){
                 paint = false;
             }
             
@@ -122,26 +131,22 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
 
 function draw(event){
                 
-        if(event == 'mousedown'){
-            ctx.beginPath();
-            ctx.moveTo(xStart, yStart);
-            ctx.lineTo(xEnd, yEnd);
-            ctx.moveTo(xStart1, yStart);
-            ctx.lineTo(xEnd1, yEnd);
-            ctx.stroke();
-        }else if(event == 'mousemove'){
-            ctx.beginPath();
-            ctx.moveTo(xStart, yStart);
-            ctx.lineTo(xEnd, yEnd);
-            ctx.moveTo(xStart1, yStart);
-            ctx.lineTo(xEnd1, yEnd);
-            ctx.stroke();
-        }else if(event == 'touchstart'){
+        if(event === 'mousedown'){
             ctx.beginPath();
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);
             ctx.stroke();
-        }else if(event == 'touchmove'){
+        }else if(event === 'mousemove'){
+            ctx.beginPath();
+            ctx.moveTo(xStart, yStart);
+            ctx.lineTo(xEnd, yEnd);
+            ctx.stroke();
+        }else if(event === 'touchstart'){
+            ctx.beginPath();
+            ctx.moveTo(xStart, yStart);
+            ctx.lineTo(xEnd, yEnd);
+            ctx.stroke();
+        }else if(event === 'touchmove'){
             ctx.beginPath();
             ctx.moveTo(xStart, yStart);
             ctx.lineTo(xEnd, yEnd);

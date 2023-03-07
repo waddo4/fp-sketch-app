@@ -49,9 +49,7 @@
                  password: password.value,
              });
              if (error) throw error;
-             const user = await getUser();
-            //  console.log(user)
-             router.push({ name: "Home", params: { user } });
+             router.push({ name: "Home"});
              } catch (error) {
                  errorMsg.value = `Error: ${error.message}`;
                  console.log(error.message)
@@ -60,13 +58,7 @@
                  }, 5000);
          }
        }  
-
-       // getUser function
-       const getUser = async () => {
-         const { data: { user } } = await supabase.auth.getUser();
-         return user;
-       }
-
+       
        return {email, password, errorMsg, signInWithEmail};
      },
    };

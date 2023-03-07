@@ -3,6 +3,10 @@
         <nav class="container py-5 px-4 flex flex-col gap-4 items-center sm:flex-row">
             <div class="flex items-center gap-x-4">
                 <h1 class="text-lg">Sketch app</h1>
+
+                <h1 v-if="user?.email">Welcome {{ user.email }}</h1>
+                <button @click="signOut">Logout</button>
+
             </div>
             <ul class="flex flex-1 justify-end gap-x-10">
                 <router-link class="cursor-pointer" :to="{ name: 'Home'}">Home</router-link> 
@@ -12,24 +16,36 @@
             </ul>
         </nav>
     </header>
-  </template>
+</template>
   
-  <script> 
-  import { supabase } from '../supabase/supabase'
-  import { useRouter } from 'vue-router';
+<script> 
+import { supabase } from '../supabase/supabase'
 
-  export default {
-    setup() {
-      // Get user from store
-      // Setup ref to router
-      const router = useRouter();
-      // Logout function
-      const logout = async () => {
-        await supabase.auth.signOut();
-        router.push("Home");
-      };
+    export default {
+        mounted() {
+                // Getting current user
+            const getUser = async () => {
+                const { data: { user } } = await supabase.auth.getUser();
+                console.log(user.email)
+                return { user };
+                }
+            getUser()
 
-      return { logout };
-    },
+                // Logout function
+            async function signOut() {
+                try {
+                    let { error } = await supabase.auth.signOut()
+                    if (error) throw error
+                } catch (error) {
+                    console.log(error.message)
+                } finally {
+                    router.push("Home")
+                }
+            }
+                return { signOut };
+                },
+        data() {
+        return { user: {}}
+}
   };
-  </script>
+ </script>

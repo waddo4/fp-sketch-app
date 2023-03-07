@@ -49,7 +49,7 @@
                  password: password.value,
              });
              if (error) throw error;
-             router.push({ name: "Home"});
+             router.push({ name: "Profile"});
              } catch (error) {
                  errorMsg.value = `Error: ${error.message}`;
                  console.log(error.message)
@@ -58,7 +58,7 @@
                  }, 5000);
          }
        }  
-       
+
        return {email, password, errorMsg, signInWithEmail};
      },
    };

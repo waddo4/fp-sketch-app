@@ -14,10 +14,11 @@
 <script>
 import $ from "jquery";
 
-// $("#canvas").on('mousemove', (e) => {
-//     const { pageX:x, pageY:y } = e; // Destructuring with renaming
-//     console.log(`X: ${ x }, Y: ${ y }`)
-// });
+$("#canvas").on('mousemove', (e) => {
+    const { pageX:x, pageY:y } = e; // Destructuring with renaming
+    console.log(`X: ${ x }, Y: ${ y }`)
+});
+
 let xStart,
     xStart1,
     xEnd,
@@ -41,7 +42,7 @@ export default {
         ctx.fillText('Hello World', 150, 100);
         ctx.lineJoin="round";
         ctx.lineCap="round";
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 10;
     
     
 $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove touchend', function(e){
@@ -70,7 +71,7 @@ $('canvas').bind('mousedown mousemove mouseup mouseleave touchstart touchmove to
                     yEnd = e.clientY - $(this).offset().top;
                     yEnd1 = (e.clientY + diff) - $(this).offset().top;
                     
-                   let lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart-xEnd) + (yStart - yEnd) * (yStart-yEnd))/5;
+                   let lineThickness = 1 + Math.sqrt((xStart - xEnd) * (xStart - xEnd) + (yStart - yEnd) * (yStart - yEnd))/5;
                    
                    if(lineThickness > 10){
                         lineThickness = 10;   

@@ -3,9 +3,9 @@
         <div id="app" class="p-8 flex flex-col items-center bg-green-300 rounded-md shadow-lg ">
             <h1 class="flex text-3xl text-slate-700 mb-4">Sketch</h1>
             <div class="flex justify-center mb-4">
-        <button v-for="color in colors" :key="color" @click="setColor(color)" :style="{ backgroundColor: color }" class="w-8 h-8 rounded-full border-2 border-white focus:outline-none"></button>
-      </div>
-            <canvas id="canvas" width="600" height="600" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
+                <input type="color" v-model="currentColor" class="w-10 h-10 rounded-full border-3 border-white focus:outline-none" />
+            </div>
+<canvas id="canvas" width="600" height="600" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
         </div>
     </div>
 </template>
@@ -14,20 +14,20 @@
 <script>
 import $ from "jquery";
 
-// Base code sourced from 
+// Base code sourced from "https://jsfiddle.net/e4spyo5d/1/"
 export default {
     data() {
     return {
       lastX: null,
       lastY: null,
       drawing: false,
-      colors: ["black", "red", "green", "blue", "orange"],
-      currentColor: "black",
+      currentColor: "#906cff",
     };
   },
     mounted(){
         let lastX, lastY;
         let drawing = false;
+        const vm = this;
 
         const canvasX = function (e) { return e.pageX - $('canvas').offset().left;}
         const canvasY = function (e) { return e.pageY - $('canvas').offset().top; }
@@ -52,7 +52,7 @@ export default {
         const x = canvasX(e);
         const y = canvasY(e);
 
-        ctx.strokeStyle = this.currentColor;
+        ctx.strokeStyle = vm.currentColor;
 
         ctx.beginPath();
 
@@ -67,8 +67,6 @@ export default {
         ctx.stroke();
         ctx.closePath();
 
-            // ctx.strokeStyle = "orange";
-
         ctx.beginPath();
         ctx.moveTo(600-lastX, lastY);
         ctx.lineTo(600-x, y);
@@ -82,10 +80,6 @@ export default {
         lastY = y;
         });
     },
-    methods: {
-    setColor(color) {
-      this.currentColor = color;
-    },
-  }
 }
+
 </script>

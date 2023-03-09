@@ -1,11 +1,10 @@
 <template>
-    <div class="max-w-screen-xl mx-auto px-4 py-10">
-        <div id="app" class="p-8 flex flex-col items-center bg-green-300 rounded-md shadow-lg ">
-            <h1 class="flex text-3xl text-slate-700 mb-4">Sketch</h1>
+    <div>
+        <div id="app" class="flex flex-col items-center rounded-md shadow-lg ">
             <div class="flex justify-center mb-4">
-                <input type="color" v-model="currentColor" class="w-10 h-10 rounded-full border-3 border-white focus:outline-none" />
+                <input type="color" v-model="currentColor" class="w-6 h-6 rounded-full focus:outline-none" />
             </div>
-<canvas id="canvas" width="600" height="600" class="rounded-md border-4 border-rose-500 bg-white"></canvas>
+            <canvas id="canvas" width="600" height="600" class="rounded-md border-4 bg-white"></canvas>
         </div>
     </div>
 </template>

@@ -10,7 +10,7 @@
             <h1 class="text-3xl mb-4">Register</h1>
             <div class="flex flex-col mb-2">
                 <label for="email" class="mb-1 text-sm">Email</label>
-                <input type="text" required class="rounded-sm p-2 text-gray-500 focus:outline-none bg-white" id="email" v-model="email">
+                <input autofocus type="text" required class="rounded-sm p-2 text-gray-500 focus:outline-none bg-white" id="email" v-model="email" >
             </div>
 
             <div class="flex flex-col mb-2">

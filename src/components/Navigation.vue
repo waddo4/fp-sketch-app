@@ -1,17 +1,17 @@
 <template>
     <header>
-        <nav v-if="user?.email" class="py-5 px-4 flex justify-between flex-col gap-4 items-center sm:flex-row">
+        <nav class="py-5 px-4 flex justify-between flex-col gap-4 items-center sm:flex-row">
             <div class="flex items-center gap-x-4">
-                <router-link :to="{name: 'Home'}" class="mb-1 text-md"><h1 class="text-3xl mr-10">Papillon</h1></router-link>
+                <router-link :to="{name: 'Home'}" class="mb-1 text-md"><h1 class="text-3xl mr-10 ml-10" id="logo">Papillon</h1></router-link>
                     <ul class="flex flex-1 justify-end gap-x-10">
-                        <router-link class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Profile' }">Profile</router-link>
-                        <router-link class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Draw' }">Draw</router-link>
-                        <router-link class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Gallery' }">Gallery</router-link>
+                        <router-link v-if="user?.email" class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Profile' }">Profile</router-link>
+                        <router-link v-if="user?.email" class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Draw' }">Draw</router-link>
+                        <router-link v-if="user?.email" class="cursor-pointer hover:text-violet-400 text-lg" :to="{ name: 'Gallery' }">Gallery</router-link>
                     </ul>
             </div>
             <div class="flex flex-row gap-4 mr-10">
                 <h1 v-if="user?.email" class="font-bold">{{ user.email }}</h1>
-                <button v-if="user?.email" @click="signOut" class="hover:text-violet-400">Logout</button>
+                <button v-if="user?.email" @click="signOut" class="hover:text-violet-400 ml-2">Logout</button>
             </div>
         </nav>
     </header>
@@ -56,3 +56,9 @@ import { reactive } from 'vue';
         }
   };
  </script>
+
+ <style>
+    #logo {
+        font-family: "flood-std", sans-serif;
+    }
+</style>

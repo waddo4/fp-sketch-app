@@ -1,7 +1,8 @@
 <template>
-    <div class="max-w-screen-sm mx-auto px-4 py-10">
-      <div class="p-8 flex flex-col items-center bg-zinc-800 rounded-md shadow-lg ">
-        <h1 class="flex text-5xl mb-4">Papillon</h1>
+    <div class="max-w-screen-sm mx-auto px-4 py-6">
+      <div class="p-8 flex flex-col items-center bg-zinc-800 rounded-lg shadow-lg ">
+        <img src="../assets/images/Papillon-2.png" alt="Papillon logo" class="w-96 h-96">
+          <p class="text-2xl italic pt-2">Symmetry in sketching</p>
           
           <router-link :to="{name: 'Login'}" custom v-slot="{ navigate }">
             <button @click="navigate"

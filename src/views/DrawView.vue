@@ -2,7 +2,7 @@
     <div>
         <div id="app" class="flex flex-col items-center rounded-md shadow-lg ">
             <div class="flex justify-center mb-4">
-                <input type="color" v-model="currentColor" class="w-6 h-6 rounded-full focus:outline-none" />
+                <input type="color" v-model="currentColor" class="w-6 h-6 rounded-full focus:outline-none cursor-pointer" />
             </div>
             <canvas id="canvas" width="600" height="600" class="rounded-md border-4 bg-white"></canvas>
         </div>

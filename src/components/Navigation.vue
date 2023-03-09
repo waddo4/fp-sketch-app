@@ -40,8 +40,8 @@ import { reactive } from 'vue';
         return { user: {}}
         },
         methods: {
-            // Logout function
-            async  signOut() {
+                // Logout function
+                async  signOut() {
                 try {
                     let { error } = await supabase.auth.signOut()
                     if (error) throw error
